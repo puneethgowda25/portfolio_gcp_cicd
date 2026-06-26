@@ -19,8 +19,6 @@ spec:
     spec:
       containers:
       - name: portfolio
-
-        image: portfolio
-
+        image: asia-south1-docker.pkg.dev/testing-puneeth/testing-cicd/portfolio:latest
         ports:
         - containerPort: 80
