@@ -1,0 +1,17 @@
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA'
+      - '.'
+
+  # Step 2: Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA'
+
+images:
+  - 'asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA'
