@@ -1,18 +1,33 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
+  # Step 1: Build Docker image
+  - name: "gcr.io/cloud-builders/docker"
     args:
-      - 'build'
-      - '-t'
-      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA'
-      - '.'
+      - "build"
+      - "-t"
+      - "asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
+      - "."
 
-  - name: 'gcr.io/cloud-builders/docker'
+  # Step 2: Push image to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
     args:
-      - 'push'
-      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA'
+      - "push"
+      - "asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
+
+  # Step 3: Create Cloud Deploy Release
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "deploy"
+      - "releases"
+      - "create"
+      - "release-$SHORT_SHA"
+      - "--delivery-pipeline=portfolio-pipeline"
+      - "--region=asia-south1"
+      - "--images=portfolio=asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
+      - "--source=."
 
 images:
-  - 'asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA'
+  - "asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
 
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: CLOUD_LOGGING_ONLY 

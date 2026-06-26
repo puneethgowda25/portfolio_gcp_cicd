@@ -1,0 +1,10 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+
+metadata:
+  name: production
+
+description: Production GKE Cluster
+
+gke:
+  cluster: projects/testing-puneeth/locations/asia-south1-a/clusters/testing-cicd-gke
