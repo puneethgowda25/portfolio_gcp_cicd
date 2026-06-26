@@ -8,3 +8,9 @@ description: Production GKE Cluster
 
 gke:
   cluster: projects/testing-puneeth/locations/asia-south1-a/clusters/testing-cicd-gke
+
+executionConfigs:
+  - usages:
+      - RENDER
+      - DEPLOY
+    serviceAccount: cloud-deploy-sa@testing-puneeth.iam.gserviceaccount.com
