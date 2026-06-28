@@ -1,5 +1,5 @@
 steps:
-  # Step 1: Build Docker image
+  # Build Docker image
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "build"
@@ -7,15 +7,15 @@ steps:
       - "asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
       - "."
 
-  # Step 2: Push image to Artifact Registry
+  # Push Docker image
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "push"
       - "asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
 
-  # Step 3: Create Cloud Deploy Release
+  # Create Cloud Deploy Release
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: gcloud
+    entrypoint: "gcloud"
     args:
       - "deploy"
       - "releases"
@@ -30,4 +30,5 @@ images:
   - "asia-south1-docker.pkg.dev/$PROJECT_ID/testing-cicd/portfolio:$SHORT_SHA"
 
 options:
-  logging: CLOUD_LOGGING_ONLY 
+  logging: CLOUD_LOGGING_ONLY
+```

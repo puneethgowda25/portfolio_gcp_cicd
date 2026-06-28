@@ -9,4 +9,3 @@ description: Portfolio CI/CD Pipeline
 serialPipeline:
   stages:
     - targetId: production
-      profiles: []
