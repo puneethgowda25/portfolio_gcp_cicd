@@ -14,4 +14,4 @@ executionConfigs:
       - RENDER
       - DEPLOY
     serviceAccount: cloud-deploy-sa@testing-puneeth.iam.gserviceaccount.com
-    artifactStorage: gs://1ef92d8b7c1e420a89747b8c4c579d68_clouddeploy  
+    artifactStorage: gs://1fe1c5feb2c34c70ab9cf1cbeaa0f3cd_clouddeploy
